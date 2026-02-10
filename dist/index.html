@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF=8">
+    <meta name="viewport" content="width=device-width , initial-scale = 1.0">
+    <title> Secret Door </title>
+  <script type="module" crossorigin src="/assets/index-4QjKdSC_.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Bf5TrQCB.css">
+</head>
+
+<body>
+
+    <!-- THREE JS CANVAS HERE-->
+    <canvas id="game-canvas"></canvas>
+
+    <!--GAME UI Layer via alpine-->
+    <div id="game-ui" x-data x-init="$store.game.init()">
+
+
+        <!--Current screen content renders here-->
+        <template x-if="$store.game.currentScreen">
+
+            <div class="screen">
+
+                <!--Image, if screen has one-->
+                <template x-if="$store.game.getScreen().image">
+                    <div class="screen-image">
+                        <img :src="$store.game.getScreen().image" :alt="$store.game.getScreen().imageAlt || ''">
+
+                    </div>
+                </template>
+                <!--Text content-->
+                <div class=" screen-text">
+                    <p x-text="$store.game.getScreen().text"> </p>
+                </div>
+
+                <!--Action Buttons-->
+                <div class="screen-actions">
+                    <template x-for="action in $store.game.getScreen().actions" :key="action.label">
+                        <button @click="$store.game.handleAction(action)" x-text="action.label">
+
+                        </button>
+                    </template>
+                </div>
+            </div>
+
+
+        </template>
+
+
+    </div>
+
+</body>
+
+
+</html>
